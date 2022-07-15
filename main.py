@@ -5,7 +5,7 @@ from pydantic import BaseModel
 
 import user_append
 
-users_db = user_append.users_information
+users_db = user_append.information_replay()
 
 app = FastAPI()
 

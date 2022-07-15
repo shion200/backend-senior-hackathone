@@ -15,19 +15,29 @@ users_information = {
     },
 }
 
-def user_return():
+example = {
+        "ahiahi" : {
+        "username" : "ahiahi",
+        "email" : "ahiahi@example.com",
+        "hashed_password" : "hello",
+        "disabled" : False,
+    },
+}
+
+def no_duplication(information :dict, beginner: dict):
+    flag = True
+    example_keys = list(beginner.keys())
+    example_value = list(beginner.values())
+    
+    for key, value in users_information.items():
+        if key == example_keys or value == example_value:
+            flag == False
+        
+    if flag == True:
+        users_information.update(example)
     return users_information
 
-def information_append(information):
-    users_information.append(information)
-    
-# example = {
-#         "ahiahi" : {
-#         "username" : "ahiahi",
-#         "email" : "ahiahi@example.com",
-#         "hashed_password" : "hello",
-#         "disabled" : False,
-#     },
-# }
-
-# information_append(example)
+def information_replay():
+    no_duplication(users_information, example)
+    replay = users_information
+    return replay
