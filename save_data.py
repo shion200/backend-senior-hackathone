@@ -31,7 +31,7 @@ def data_table():
             unit1    INTEGER,
             unit2    INTEGER,
             calorie  INTEGER,
-            today     INTEGER
+            today    INTEGER
         );
     """ 
     c.execute(sql)
