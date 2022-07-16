@@ -3,27 +3,33 @@ import pandas as pd
 
 import get_meal_calorie 
 import main
+import calorie_graph
 
 name = 'shion'
 foodname = '煮込み' 
 unit1 = 757
 unit2 = 0
 calorie = 522
+date = calorie_graph.date()
 
 db_name = "meal_data.db"
 conn = sqlite3.connect(db_name,
                        isolation_level=None
                     )
-
-# sql = """
-#     CREATE TABLE FOOD(
-#         username VARCHAR(20),
-#         foodname VARCHAR(20),
-#         unit1    INTEGER,
-#         unit2    INTEGER,
-#         calorie  INTEGER
-#     );
-# """ 
+def data_table():
+    c = conn.cursor()
+    sql = """
+        CREATE TABLE FOOD(
+            username VARCHAR(20),
+            foodname VARCHAR(20),
+            unit1    INTEGER,
+            unit2    INTEGER,
+            calorie  INTEGER
+            date     INTEGER
+        );
+    """ 
+    c.eecute(sql)
+    c.close()
 
 # sql = f"""
 #     INSERT INTO FOOD VALUES(
@@ -31,34 +37,43 @@ conn = sqlite3.connect(db_name,
 #         {foodname},
 #         {unit1},
 #         {unit2},
-#         {calorie}
+#         {calorie},
+#         {date},
 #     )
 # """
+def data_write():
+    sql = (name, foodname, unit1, unit2, calorie, date)
+    c = conn.cursor()
+    c.execute("insert into FOOD VALUES(?, ?, ?, ?, ?, ?)",sql)
+    c.commit()
+    c.in_transaction = False
+    c.close()
 
-sql = (name, foodname, unit1, unit2, calorie)
-c = conn.cursor()
-a = conn.cursor()
-
-namevalue = """SELECT DISTINCT username FROM FOOD"""
 # c.execute(all)
-c.execute("insert into FOOD VALUES(?, ?, ?, ?, ?)",sql)
-all = """SELECT DISTINCT * FROM FOOD"""
 
-a.execute(namevalue)
-c.execute(all)
-# data = c.fetchall()
+def data_read():
+    all = """SELECT DISTINCT * FROM FOOD"""
+    c = conn.cursor()
+    c.execute(all)
+    for item_all in c:
+        user = item_all[0]
+        if user == name:
+            print(item_all)
+    c.close()
 
-for item_all in c:
-    user = item_all[0]
-    if user == name:
-        print(item_all)
-c.close()
+def mouth_calorie_sum():
+    ans = 0
+    all = """SELECT DISTINCT * FROM FOOD"""
+    c = conn.cursor()
+    for item_all in c:
+        user = item_all[0]
+        if user == name:
+            ans += item_all[4]
+    return ans
 
 # def read_not_same_name():
     
 # print(sql)
-# conn.commit()
-# conn.in_transaction = False
 # conn.execute(sql)
 # conn.close()
     
