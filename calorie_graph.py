@@ -15,7 +15,7 @@ def calorie_num():
     }
     return data
 
-print(calorie_num())
+# print(calorie_num())
 # print(date())
 # type detailOfDate = {
 #     "date" : number,

@@ -63,11 +63,11 @@ def data_read():
     all = """SELECT DISTINCT * FROM FOOD"""
     c = conn.cursor()
     c.execute(all)
-    for item_all in c:
-        print(item_all)
-        user = item_all[0]
-        if user == name:
-            print(item_all)
+    # for item_all in c:
+        # print(item_all)
+        # user = item_all[0]
+        # if user == name:
+            # print(item_all)
     c.close()
 
 data_read()

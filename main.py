@@ -4,6 +4,7 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel
 
 import user_append
+import os
 
 users_db = user_append.information_replay()
 name = 'shion'
@@ -79,3 +80,7 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
 @app.get("/users/me")
 async def read_users_me(current_user: User = Depends(get_current_active_user)):
     return current_user
+
+# if __name__ == "__main__":
+#     port = int(os.getenv("PORT", 5000))
+#     app.run(host="0.0.0.0", port=port)
