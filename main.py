@@ -6,7 +6,7 @@ from pydantic import BaseModel
 import user_append
 
 users_db = user_append.information_replay()
-
+name = 'shion'
 app = FastAPI()
 
 def fake_hash_password(password: str):
@@ -56,6 +56,7 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
 @app.post("/token")
 async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     user_dict = users_db.get(form_data.username)
+    name - user_dict
     if not user_dict:
         raise HTTPException(status_code = 400, detail = "Incorrect username or password")
     user = UserInDB(**user_dict)

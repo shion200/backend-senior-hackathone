@@ -42,4 +42,8 @@ def main(detect_word):
     print(return_array)
     return return_array
 
-main('リンゴ')
+# main('カレー')
+name = "カレー"
+
+def meal_database() :
+    main(name)
