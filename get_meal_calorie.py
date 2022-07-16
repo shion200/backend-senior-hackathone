@@ -47,3 +47,4 @@ name = "カレー"
 
 def meal_database() :
     main(name)
+# print(meal_database())

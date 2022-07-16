@@ -1,15 +1,13 @@
 users_information = {
     "shion" : {
         "username" : "shion",
-        # "full_name" : "shion kyumma",
-        # "email" : "usushio2002@gmail.com",
+        "email" : "usushio2002@gmail.com",
         "hashed_password" : "ahiahi",
         # "disabled" : False,
     },
     "alice" : {
         "username" : "alice",
-        # "full_name" : "Alice Wonderson",
-        # "email" : "alice@example.com",
+        "email" : "alice@example.com",
         "hashed_password": "secret2",
         # "disabled" : True,
     },
@@ -18,7 +16,7 @@ users_information = {
 example = {
         "ahiahi" : {
         "username" : "ahiahi",
-        # "email" : "ahiahi@example.com",
+        "email" : "ahiahi@example.com",
         "hashed_password" : "hello",
         # "disabled" : False,
     },
@@ -27,6 +25,7 @@ example = {
 data_input= {
     "name" : {
         "username" : "default",
+        "email" : "ahiahi@example.com",
         "hashed_password" : "default",
     }
 }

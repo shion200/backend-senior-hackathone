@@ -68,7 +68,9 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     # if not user_email == mail.email:
     #     raise HTTPException(status_code = 400, detail = "Incorrect email")
     return {"access_token" : user.username, "token_type" : "bearer"}
-    
+
+# @app.post("/signup")
+# async def siginup():
 
 # @app.get("/items")
 # async def read_items(q: Optional[str] = None, skip: int = 0, limit: int = 100):
