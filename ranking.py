@@ -18,9 +18,9 @@ conn = sqlite3.connect(db_rank,
 
 # c=conn.cursor()
 
-token = "ahiahiahiahi"
+token = "name"
 name = "dori-"
-calo = 300
+calo = 100
 
 def rank():
     c = conn.cursor()
@@ -52,9 +52,13 @@ def rank_write():
     
 def rank_num():
     c = conn.cursor()
+    c.execute("""SELECT * FROM RANK ORDER BY calorie ASC;""")
+    for item in c :
+        print(item)
     
+rank_num()
     
-# print(rank_write())
+# rank_write()
     
 name = "shion"
 num = save_data.mouth_calorie_sum()
