@@ -57,7 +57,7 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
 @app.post("/token")
 async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     user_dict = users_db.get(form_data.username)
-    name - user_dict
+    name = user_dict
     if not user_dict:
         raise HTTPException(status_code = 400, detail = "Incorrect username or password")
     user = UserInDB(**user_dict)
@@ -76,6 +76,7 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
 # @app.get("/items")
 # async def read_items(q: Optional[str] = None, skip: int = 0, limit: int = 100):
 #     return {"q": q, "skip":skip, "limit":limit}
+
 
 @app.get("/users/me")
 async def read_users_me(current_user: User = Depends(get_current_active_user)):
