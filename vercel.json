@@ -17,29 +17,9 @@
         }
     ],
     "routes": [
-        { 
-            "src": "/setCalorieOfGoal", 
-            "dest": "main.py" 
-        },
         {
-            "src" : "/getCalorieRanking",
-            "dest" : "main.py"
-        },
-        {
-            "src" : "/setCalorieOfDay",
-            "dest" : "main.py"
-        },
-        {
-            "src" : "/caloKUSA",
-            "dest" : "main.py"
-        },
-        {
-            "src" : "/signin",
-            "dest" : "main.py"
-        },
-        {
-            "src" : "/signup",
-            "dest" : "main.py"
+            "src": "/(.*)",
+            "dest": "/"
         }
     ]
    }
