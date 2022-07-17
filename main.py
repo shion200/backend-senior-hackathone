@@ -1,12 +1,11 @@
 import os
 import secrets
 import sqlite3
-from typing import Optional
 
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from pydantic import BaseModel
 
+import classname
 import user_append
 from dbclass.calorie import caloKUSA, inputCalorie, userCalorie
 from dbclass.ranking import ranking
@@ -25,15 +24,17 @@ def fake_hash_password(password: str):
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl = "token")
 
-class User(BaseModel):
-    username : str
-    email : Optional[str] = None
-    token:str
-    full_name : Optional[str] = None
-    disabled : Optional[bool] = None
+classname.User(BaseModel)
+classname.UserInDB(User)
+# class User(BaseModel):
+#     username : str
+#     email : Optional[str] = None
+#     token:str
+#     full_name : Optional[str] = None
+#     disabled : Optional[bool] = None
 
-class UserInDB(User):
-    hashed_password: str
+# class UserInDB(User):
+#     hashed_password: str
 
 @app.post("/signup")
 async def signup(payload:SignInUser):
@@ -78,4 +79,3 @@ async def GetCalorieRanking():
     response = getCalorieRanking(db)
 
     return response
-
