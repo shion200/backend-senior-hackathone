@@ -1,15 +1,20 @@
-from fastapi import FastAPI, Depends, HTTPException, status
+import os
+import secrets
+import sqlite3
 from typing import Optional
+
+from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel
 
+import methods.userManagement as UM
 import user_append
-import os
 
 users_db = user_append.information_replay()
 name = 'shion'
 app = FastAPI()
-
+conn= sqlite3.connect('database.db')
+db = conn.cursor()
 def fake_hash_password(password: str):
     return password
 
@@ -18,12 +23,13 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl = "token")
 class User(BaseModel):
     username : str
     email : Optional[str] = None
+    token:str
     full_name : Optional[str] = None
     disabled : Optional[bool] = None
-    
+
 class UserInDB(User):
     hashed_password: str
-    
+
 # class UserInEmail(User):
 #     email : str
 
@@ -53,11 +59,12 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
     if current_user.disabled:
         raise HTTPException(status_code = 400, detail = "Inactive user")
     return current_user
- 
+
 @app.post("/token")
 async def login(form_data: OAuth2PasswordRequestForm = Depends()):
+    print(form_data.username)
     user_dict = users_db.get(form_data.username)
-    name - user_dict
+    name = user_dict
     if not user_dict:
         raise HTTPException(status_code = 400, detail = "Incorrect username or password")
     user = UserInDB(**user_dict)
@@ -68,7 +75,7 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     # user_email = get_email(form_data.email)
     # if not user_email == mail.email:
     #     raise HTTPException(status_code = 400, detail = "Incorrect email")
-    return {"access_token" : user.username, "token_type" : "bearer"}
+    return {"access_token" : user.token, "token_type" : "bearer"}
 
 # @app.post("/signup")
 # async def siginup():
@@ -84,3 +91,10 @@ async def read_users_me(current_user: User = Depends(get_current_active_user)):
 # if __name__ == "__main__":
 #     port = int(os.getenv("PORT", 5000))
 #     app.run(host="0.0.0.0", port=port)
+@app.post("/signup")
+async def login(form_data: OAuth2PasswordRequestForm = Depends()):
+    response =  UM.addUser(db,conn,form_data.username,form_data.password)
+    if response == "username exist":
+        raise HTTPException(status_code = 400, detail = response)
+
+    return response
