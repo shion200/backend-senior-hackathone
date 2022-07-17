@@ -19,7 +19,9 @@ async def addUser(db,connectedDB,username,password):
     connectedDB.commit()
     return "create new user"
 
-async def loginUser(db,username,password):
+async def signinUser(db,username,password):
     db.execute('SELECT * FROM userstable WHERE username =? AND password = ?',(username,password))
     data = db.fetchall()
+    if data == []:
+        return "Incorrect username or password"
     return data

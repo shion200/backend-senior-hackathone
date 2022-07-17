@@ -1,8 +1,8 @@
 import sqlite3
 from typing import List
 
-import DBclass.dbclass as cl
-import methods.userManagement as UM
+import DBclass.user as cl
+import methods.user as UM
 from fastapi import Depends, FastAPI, HTTPException, status
 from main import User
 from pydantic import BaseModel  # リクエストbodyを定義するために必要
