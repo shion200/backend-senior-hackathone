@@ -1,8 +1,10 @@
-{
-    "src": "config/wsgi.py",
-    "use": "@vercel/python",
-    "config": {
-        "maxLambdaSize": "15mb",
-        "runtime": "python3.9"
-    }
-}
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+
+[requires]
+python_version = "3.9"

@@ -1,15 +1,15 @@
 {
-    "regions": [
-        "hnd1"
-    ],
+    "version": 2,
     "builds": [
         {
-            "src": "config/main.py",
-            "use": "@vercel/python",
-            "config": {
-                "maxLambdaSize": "15mb",
-                "runtime": "python3.9"
-            }
+            "src": "./main.py",
+            "use": "@vercel/python"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "/"
         }
     ]
-}
+ }
