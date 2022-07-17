@@ -135,9 +135,9 @@ async def SetCalorieOfGoal(payload:loginUser):
 
     return False
 
-# @app.get("/getCalorieRanking",response_model=ranking)
-# async def GetCalorieRanking():
-#     response = getCalorieRanking(db)
+@app.get("/getCalorieRanking",response_model=ranking)
+async def GetCalorieRanking():
+    response = getCalorieRanking(db)
 
-#     return response
+    return response
 
