@@ -1,7 +1,4 @@
 { 
-    "regions" : [
-        "hnd1"
-    ],
     "builds": [
         { 
             "src": "main.py", 
@@ -21,7 +18,7 @@
     ],
     "routes": [
         { 
-            "src": "//setCalorieOfGoal", 
+            "src": "/setCalorieOfGoal", 
             "dest": "main.py" 
         },
         {
