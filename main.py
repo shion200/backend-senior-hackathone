@@ -8,10 +8,12 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel
 
 import user_append
-from dbclass.calorie import caloKUSA, inputCalorie, userCalorie
+from dbclass.calorie import (caloKUSA, food, foodCalorie, inputCalorie,
+                             userCalorie)
 from dbclass.ranking import ranking
 from dbclass.user import SignInUser, SignUpUser, loginUser
-from methods.calorie import getUserCalorie, setCalorieOfDay, setCalorieOfGoal
+from methods.calorie import (getFoodCalorie, getUserCalorie, setCalorieOfDay,
+                             setCalorieOfGoal)
 from methods.ranking import getCalorieRanking
 from methods.user import addUser, signinUser
 
@@ -98,14 +100,14 @@ class UserInDB(User):
 #     port = int(os.getenv("PORT", 5000))
 #     app.run(host="0.0.0.0", port=port)
 @app.post("/signup")
-async def signup(payload:SignInUser):
+async def signup(payload:SignUpUser):
     response =  addUser(db,conn,payload.username,payload.password)
     if response == "username exist":
         raise HTTPException(status_code = 400, detail = response)
     return response
 
 @app.post("/signin",response_model= loginUser)
-async def signin(payload:SignUpUser):
+async def signin(payload:SignInUser):
     response =  signinUser(db,payload.username,payload.password)
     if response == "Incorrect username or password":
         raise HTTPException(status_code = 400, detail = response)
@@ -120,16 +122,16 @@ async def calokusa(payload:loginUser):
 
     return response
 
-@app.post("/setCalorieOfDay",response_model=caloKUSA)
+@app.put("/setCalorieOfDay",response_model=caloKUSA)
 async def SetCalorieOfDay(payload:inputCalorie):
     response =  setCalorieOfDay(db,conn,payload.calorie,payload.date,payload.token)
     if response == "update calorie":
         raise HTTPException(status_code = 200, detail = response)
 
     return False
-@app.post("/setCalorieOfGoal",response_model=userCalorie)
+@app.put("/setCalorieOfGoal",response_model=userCalorie)
 async def SetCalorieOfGoal(payload:loginUser):
-    response = setCalorieOfGoal(db,conn,payload.calorie,payload.date,payload.token)
+    response = setCalorieOfGoal(db,conn,payload.calorie,payload.token)
     if response == "update calorie":
         raise HTTPException(status_code = 200, detail = response)
 
@@ -141,3 +143,8 @@ async def GetCalorieRanking():
 
     return response
 
+@app.get("/getCalorieOfFood",response_model=foodCalorie)
+async def GetFoodCalorie(payload:food):
+    response = getFoodCalorie(db,conn,payload.food)
+
+    return response

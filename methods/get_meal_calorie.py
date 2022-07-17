@@ -1,6 +1,8 @@
+import re
+
 import requests
 from bs4 import BeautifulSoup
-import re
+
 
 def main(detect_word):
     url="https://ssl.mobadai.jp/m/index.php?np=28c4&c=swps2&mspid=quicksearch"
@@ -45,6 +47,6 @@ def main(detect_word):
 # main('カレー')
 name = "おにぎりた"
 
-def meal_database() :
-    main(name)
+def meal_database(foodname) :
+    main(foodname)
 # print(meal_database())

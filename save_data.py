@@ -1,16 +1,18 @@
-import sqlite3
-import pandas as pd
 import datetime
+import sqlite3
 
-import get_meal_calorie 
+import pandas as pd
+
 import main
+import methods.get_meal_calorie as get_meal_calorie
+
 
 def date():
     dt = datetime.datetime.now()
     return dt.day
 
 name = 'shion'
-foodname = 'カレーうどん' 
+foodname = 'カレーうどん'
 unit1 = 757
 unit2 = 0
 calorie = 456
@@ -32,10 +34,10 @@ def data_table():
             unit1        INTEGER,
             unit2        INTEGER,
             calorie      INTEGER,
-            gramCalorie  INTEGER, 
+            gramCalorie  INTEGER,
             today        INTEGER,
         );
-    """ 
+    """
     c.execute(sql)
     c.close()
 
@@ -95,11 +97,10 @@ def day_calorie_sum():
         if user == name and date() == item_all[6]:
             ans += item_all[4]
     return ans
-    
+
 # print(mouth_calorie_sum())
 # def read_not_same_name():
-    
+
 # print(sql)
 # conn.execute(sql)
 # conn.close()
-    
