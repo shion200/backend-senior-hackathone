@@ -71,7 +71,7 @@ def user_write():
     all = """SELECT DISTINCT * FROM USER"""
     c.execute(all)
     for item in c :
-        if item[0] == name:
+        if item[3] == token:
             c.close()
             return False
     sql = (name, email, password, token)
@@ -96,14 +96,14 @@ def user_replay():
 def change_dict_key(d, old_key, new_key, default_value=None):
     d[new_key] = d.pop(old_key, default_value)
 
-# def input_user_data(name, new_name, new_password):
-#     change_dict_key(data_input, "name", name)
-#     data_input.update({ name : {"username" : new_name, "hashed_password" : new_password}})
+def input_user_data(name, new_name,new_email,new_password, new_token):
+    change_dict_key(data_input, "name", name)
+    data_input.update({ name : {"username" : new_name, "email" : new_email, "hashed_password" : new_password, "new_token" : new_token}})
     # data_input.update("username" : new_name,"hashed_password" : new_password})
 
-# def input_data():
-#     input_user_data("ahiahiahi","ahiahiahi", "enter")
-#     return data_input
+def input_data():
+    input_user_data("ahiahiahi","ahiahiahi", "ahiahiahi@example.com", "enter", "ahiahiahi")
+    return data_input
     
 def no_duplication(information :dict, beginner: dict):
     flag = True
@@ -117,5 +117,10 @@ def no_duplication(information :dict, beginner: dict):
     if flag == True:
         users_information.update(beginner)
     return users_information
+
+def information_replay():
+    no_duplication(users_information, input_data())
+    replay = users_information
+    return replay
 
 user_replay()

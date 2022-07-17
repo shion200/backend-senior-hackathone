@@ -43,7 +43,7 @@ def main(detect_word):
     return return_array
 
 # main('カレー')
-name = "カレー"
+name = "おにぎりた"
 
 def meal_database() :
     main(name)
