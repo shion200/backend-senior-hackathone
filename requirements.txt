@@ -3,3 +3,4 @@ requests==2.22.0
 uvicorn==0.17.6
 fastapi==0.78.0
 pydantic==1.9.1
+pandas==1.4.3
