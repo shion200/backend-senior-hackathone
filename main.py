@@ -15,10 +15,10 @@ from methods.calorie import getUserCalorie, setCalorieOfDay, setCalorieOfGoal
 from methods.ranking import getCalorieRanking
 from methods.user import addUser, signinUser
 
-users_db = user_append.information_replay()
+users_db = user_append.user_replay()
 name = 'shion'
 app = FastAPI()
-conn= sqlite3.connect('database.db')
+conn= sqlite3.connect('userdata.db')
 db = conn.cursor()
 def fake_hash_password(password: str):
     return password
