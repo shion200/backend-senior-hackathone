@@ -21,12 +21,28 @@
     ],
     "routes": [
         { 
-            "src": "/static/(.*)", 
-            "dest": "/static/$1" 
+            "src": "//setCalorieOfGoal", 
+            "dest": "main.py" 
         },
         {
-            "src": "/(.*)",
-            "dest" : "config/wsgi.py"
+            "src" : "/getCalorieRanking",
+            "dest" : "main.py"
+        },
+        {
+            "src" : "/setCalorieOfDay",
+            "dest" : "main.py"
+        },
+        {
+            "src" : "/caloKUSA",
+            "dest" : "main.py"
+        },
+        {
+            "src" : "/signin",
+            "dest" : "main.py"
+        },
+        {
+            "src" : "/signup",
+            "dest" : "main.py"
         }
     ]
    }
