@@ -5,7 +5,6 @@ import sqlite3
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
-import classname
 import user_append
 from dbclass.calorie import caloKUSA, inputCalorie, userCalorie
 from dbclass.ranking import ranking
@@ -14,27 +13,11 @@ from methods.calorie import getUserCalorie, setCalorieOfDay, setCalorieOfGoal
 from methods.ranking import getCalorieRanking
 from methods.user import addUser, signinUser
 
-users_db = user_append.user_replay()
-name = 'shion'
 app = FastAPI()
 conn= sqlite3.connect('userdata.db')
 db = conn.cursor()
-def fake_hash_password(password: str):
-    return password
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl = "token")
-
-classname.User(BaseModel)
-classname.UserInDB(User)
-# class User(BaseModel):
-#     username : str
-#     email : Optional[str] = None
-#     token:str
-#     full_name : Optional[str] = None
-#     disabled : Optional[bool] = None
-
-# class UserInDB(User):
-#     hashed_password: str
 
 @app.post("/signup")
 async def signup(payload:SignInUser):
