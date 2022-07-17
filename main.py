@@ -35,68 +35,6 @@ class User(BaseModel):
 class UserInDB(User):
     hashed_password: str
 
-# class UserInEmail(User):
-#     email : str
-
-
-# def get_user(sb, username: str):
-#     if username in db:
-#         user_dict = db[username]
-#         return UserInDB(**user_dict)
-
-# def fake_decode_token(token):
-#     user = get_user(users_db, token)
-#     return user
-
-# # def get_email(email: str):
-# #     return email
-
-# async def get_current_user(token: str = Depends(oauth2_scheme)):
-#     user = fake_decode_token(token)
-#     if not user:
-#         raise HTTPException(
-#             status_code = status.HTTP_401_UNAUTHORIZED,
-#             detail = "Invaild authentication credential",
-#             headers = {"www-Authenticate" : "Bearer"},
-#         )
-#     return user
-
-# async def get_current_active_user(current_user: User = Depends(get_current_user)):
-#     if current_user.disabled:
-#         raise HTTPException(status_code = 400, detail = "Inactive user")
-#     return current_user
-
-# @app.post("/token")
-# async def login(payload: OAuth2PasswordRequestForm = Depends()):
-#     print(payload.username)
-#     user_dict = users_db.get(payload.username)
-#     name = user_dict
-#     if not user_dict:
-#         raise HTTPException(status_code = 400, detail = "Incorrect username or password")
-#     user = UserInDB(**user_dict)
-#     hashed_password = fake_hash_password(payload.password)
-#     if not hashed_password == user.hashed_password:
-#         raise HTTPException(status_code = 400, detail = "Incorrect username or password")
-#     # mail = UserInEmail(**user_dict)
-#     # user_email = get_email(payload.email)
-#     # if not user_email == mail.email:
-#     #     raise HTTPException(status_code = 400, detail = "Incorrect email")
-#     return {"access_token" : user.token, "token_type" : "bearer"}
-
-# @app.post("/signup")
-# async def siginup():
-
-# @app.get("/items")
-# async def read_items(q: Optional[str] = None, skip: int = 0, limit: int = 100):
-#     return {"q": q, "skip":skip, "limit":limit}
-
-# @app.get("/users/me")
-# async def read_users_me(current_user: User = Depends(get_current_active_user)):
-#     return current_user
-
-# if __name__ == "__main__":
-#     port = int(os.getenv("PORT", 5000))
-#     app.run(host="0.0.0.0", port=port)
 @app.post("/signup")
 async def signup(payload:SignInUser):
     response =  addUser(db,conn,payload.username,payload.password)
