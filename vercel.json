@@ -1,4 +1,32 @@
-{
-    "builds": [{ "src": "main.py", "use": "@vercel/python" }],
-    "routes": [{ "src": "/(.*)", "dest": "/main.py" }]
+{ 
+    "regions" : [
+        "hnd1"
+    ],
+    "builds": [
+        { 
+            "src": "main.py", 
+            "use": "@vercel/python",
+            "config": {
+                "maxLambdaSize": "15mb",
+                "runtime": "python3.9"
+            }
+        },
+        {
+            "src": "build_files.sh",
+            "use": "@vercel/static-build",
+            "config": {
+              "distDir": "static"
+            }
+        }
+    ],
+    "routes": [
+        { 
+            "src": "/(.*)", 
+            "dest": "/main.py" 
+        },
+        {
+            "src" : "/(.*)",
+            "dest" : "/"
+        }
+    ]
    }
