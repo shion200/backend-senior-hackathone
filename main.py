@@ -38,6 +38,7 @@ class UserInDB(User):
 # class UserInEmail(User):
 #     email : str
 
+
 # def get_user(sb, username: str):
 #     if username in db:
 #         user_dict = db[username]

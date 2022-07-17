@@ -14,6 +14,7 @@ foodname = 'カレーうどん'
 unit1 = 757
 unit2 = 0
 calorie = 456
+gramcalorie = int(calorie/unit1)
 today = date()
 
 db_name = "meal_data.db"
@@ -26,12 +27,13 @@ def data_table():
     c = conn.cursor()
     sql = """
         CREATE TABLE FOOD(
-            username VARCHAR(20),
-            foodname VARCHAR(20),
-            unit1    INTEGER,
-            unit2    INTEGER,
-            calorie  INTEGER,
-            today    INTEGER
+            username     VARCHAR(20),
+            foodname     VARCHAR(20),
+            unit1        INTEGER,
+            unit2        INTEGER,
+            calorie      INTEGER,
+            gramCalorie  INTEGER, 
+            today        INTEGER,
         );
     """ 
     c.execute(sql)
@@ -50,9 +52,9 @@ def data_table():
 #     )
 # """
 def data_write():
-    sql = (name, foodname, unit1, unit2, calorie, today)
+    sql = (name, foodname, unit1, unit2, calorie, gramcalorie, today)
     c = conn.cursor()
-    c.execute("insert into FOOD VALUES(?, ?, ?, ?, ?, ?)",sql)
+    c.execute("insert into FOOD VALUES(?, ?, ?, ?, ?, ?, ?)",sql)
     # c.commit()
     # c.in_transaction = False
     c.close()
@@ -90,7 +92,7 @@ def day_calorie_sum():
     c.execute(all)
     for item_all in c:
         user = item_all[0]
-        if user == name and date() == item_all[5]:
+        if user == name and date() == item_all[6]:
             ans += item_all[4]
     return ans
     
